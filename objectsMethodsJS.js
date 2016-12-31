@@ -1,5 +1,5 @@
-//date release 1395/10/08  v1.0  URL github is :    https://github.com/kavousimahdy
-//object text reverse,normal,abbrevation
+//date release 1395/10/11    URL github is :    https://github.com/kavousimahdy
+//object text reverse,normal,abbrevation,charCodeAt
 var processTextJs = {
     reverse: function (elementId, seperate_character) {
         var trimValue;
@@ -11,7 +11,7 @@ var processTextJs = {
             return trimValue.split('').reverse().join(seperate_character);
         }
     },
-    normal: function (elementId, seperate_character) {
+    normal: function (elementId, seperate_character) {  //normal text elementId with characters
         var trimValue;
         if (document.getElementById(elementId).nodeName == 'INPUT') {
             trimValue = document.getElementById(elementId).value.trim();
@@ -23,7 +23,7 @@ var processTextJs = {
     },
     //return document.getElementById(idtext).value.split('').join(seperate_character);
 
-    abbrevation: function (elementId) {
+    abbrevation: function (elementId) { //convert elementId to  abbrevation elementId
         trimValue = document.getElementById(elementId).value.trim();
         var i, abbrevation = '';
         if (document.getElementById(elementId).nodeName == 'INPUT') {
@@ -37,19 +37,32 @@ var processTextJs = {
             abbrevation += str[0];
         }
         return abbrevation.toUpperCase();
-    }
+    },  //return function abbrevation
+    charCodeAt: function (elementId, seperateCharCode) {  //return CODE ASCII characters
+        var charCode = '';
+        if (document.getElementById(elementId).nodeName == 'INPUT') {
+            elementIdValue = document.getElementById(elementId).value;
+
+        } else {
+            elementIdValue = document.getElementById(elementId).innerText;
+        }
+        for (i = 0; i < elementIdValue.length; i++) {
+            charCode += elementIdValue.charCodeAt(i) + seperateCharCode;
+        }
+        return charCode;
+
+    } //end function charCodeAt
+
+}   //end  processTextJs
+
+
+//examples
+document.getElementById('textid').onkeyup = function () {
+    charCodevalue = processTextJs.charCodeAt('textid', ',');
+    document.getElementById('pid').innerText = charCodevalue;
 }
 
-//example
-/*
-html:
- <input type="tex" id="idtext" />
- <p id="idp"></p>
-
- js:
- document.getElementById('idtext').onkeyup=function(){
-     var reverText= processTextJs.reverse("idtext",'&#9865;')  ;
-     document.getElementById('idp').innerHTML=reverText;
- }
-
- */
+document.getElementById('textid').onkeyup = function () {
+    var reverText = processTextJs.reverse("textid", '&#9865;');
+    document.getElementById('pid').innerHTML = reverText;
+}
