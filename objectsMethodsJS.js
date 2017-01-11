@@ -1,6 +1,72 @@
 //date release 1395/10/11    URL github is :    https://github.com/kavousimahdy
-//object text reverse,normal,abbrevation,charCodeAt
-var processTextJs = {
+//object permissionsJs,processTextJs
+
+var permissionsJs = {       ////start permissionsJs
+    camera: function (videoId) {
+        var video = document.getElementById(videoId);
+        navigator.getUserMedia = navigator.getUserMedia ||
+            navigator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia ||
+            navigator.msGetUserMedia ||
+            navigator.oGetUserMedia;
+        if (navigator.getUserMedia) {
+            navigator.getUserMedia({video: true}, handleVideo, videoError);
+        }
+        function handleVideo(stream) {
+            video.src = window.URL.createObjectURL(stream);
+        }
+
+        function videoError(e) {
+            // for handle error
+        }
+    },
+    notification: function (title, body, icon, urlPage, functionOnClickNotification, functionOnCloseNotification) {
+        if (!("Notification" in window)) {
+            alert('not support Notification browser');
+        } else if (Notification.permission !== 'granted') {
+            Notification.requestPermission()
+        } else if (Notification.permission == 'granted') {
+            var notify = new Notification('salam',
+                {
+                    body: body,
+                    icon: icon
+                    //data:data
+                });
+        }
+        if (!(functionOnClickNotification === undefined || functionOnClickNotification === '') && typeof functionOnClickNotification == 'function') {
+            notify.onclick = function (event) {
+                functionOnClickNotification()
+            }
+        }
+        if (!(functionOnCloseNotification === undefined || functionOnCloseNotification === '') && typeof functionOnCloseNotification == 'function') {
+            notify.onclose = function (event) {
+                functionOnCloseNotification()
+            }
+        }
+        return notify;
+    }
+}
+
+/* examples for notification object */
+
+//example for permissionsJs.notification()
+/* document.onclick = function () {
+ permissionsJs.notification('titile me', 'body text me ', 'mypic.jpg', 'mypage.php',
+ function () {
+ window.open('m.php', '_blank')
+ })
+ }*/
+
+
+/* example for permissionsJs.camera()  */
+//html:
+// <video autoplay="true" id="myvideo" width="280" style="border:2px solid gray;box-shadow: 10px 10px 50px inset " height="250"> </video><video autoplay="true" id="myvideo"> </video>
+// js:
+//permissionsJs.camera('myvideo')
+                                        //end permissionsJs
+
+
+var processTextJs = {      //start processTextJs
     reverse: function (elementId, seperate_character) {
         var trimValue;
         if (document.getElementById(elementId).nodeName == 'INPUT') {
@@ -37,7 +103,7 @@ var processTextJs = {
             abbrevation += str[0];
         }
         return abbrevation.toUpperCase();
-    },  //return function abbrevation
+    },  //end function abbrevation
     charCodeAt: function (elementId, seperateCharCode) {  //return CODE ASCII characters
         var charCode = '';
         if (document.getElementById(elementId).nodeName == 'INPUT') {
@@ -53,16 +119,25 @@ var processTextJs = {
 
     } //end function charCodeAt
 
-}   //end  processTextJs
-
-
-//examples
-document.getElementById('textid').onkeyup = function () {
-    charCodevalue = processTextJs.charCodeAt('textid', ',');
-    document.getElementById('pid').innerText = charCodevalue;
 }
 
-document.getElementById('textid').onkeyup = function () {
-    var reverText = processTextJs.reverse("textid", '&#9865;');
-    document.getElementById('pid').innerHTML = reverText;
-}
+//examples object processTextJs
+//example for   processTextJs.charCodeAt()
+//html:
+// <input type="text" id="textid" />
+// <p id="pid" />
+//js:
+/*
+ document.getElementById('textid').onkeyup = function () {
+ charCodevalue = processTextJs.charCodeAt('textid', ',');
+ document.getElementById('pid').innerText = charCodevalue;
+ }
+ */
+
+//example for   processTextJs.reverse()
+//    document.getElementById('textid').onkeyup = function () {
+//        var reverText = processTextJs.reverse("textid", '&#9865;');
+//        document.getElementById('pid').innerHTML = reverText;
+//    }
+
+                                    //end  processTextJs
