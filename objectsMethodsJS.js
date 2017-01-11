@@ -1,4 +1,4 @@
-//date release 1395/10/11    URL github is :    https://github.com/kavousimahdy
+//date update 1395/10/22    URL github is :    https://github.com/kavousimahdy
 //object permissionsJs,processTextJs
 
 var permissionsJs = {       ////start permissionsJs
