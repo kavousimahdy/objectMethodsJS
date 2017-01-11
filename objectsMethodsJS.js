@@ -26,7 +26,7 @@ var permissionsJs = {       ////start permissionsJs
         } else if (Notification.permission !== 'granted') {
             Notification.requestPermission()
         } else if (Notification.permission == 'granted') {
-            var notify = new Notification('salam',
+            var notify = new Notification(title,
                 {
                     body: body,
                     icon: icon
