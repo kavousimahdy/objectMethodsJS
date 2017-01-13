@@ -74,10 +74,9 @@ var locationJs = {            //start object location
         return (url.toString().slice(url.toString().indexOf('?') + 1, url.toString().length))
     }
 }
-// alert(locationJs.getQueryString('m.php?id=20&fname=mahdi&lname=kavousi'))
 // alert(locationJs.getQueryString())  //get queryString current page
-
-                                    //start object location
+// alert(locationJs.getQueryString('m.php?id=20&fname=mahdi&lname=kavousi'))  //get queryString specify url page 
+                                    //end object location
 
 
 var processTextJs = {      //start processTextJs
