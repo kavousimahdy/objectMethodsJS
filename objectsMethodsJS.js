@@ -1,4 +1,4 @@
-//date update 1395/10/22    URL github is :    https://github.com/kavousimahdy
+//date release 1395/10/11    URL github is :    https://github.com/kavousimahdy
 //object permissionsJs,processTextJs
 
 var permissionsJs = {       ////start permissionsJs
@@ -26,7 +26,7 @@ var permissionsJs = {       ////start permissionsJs
         } else if (Notification.permission !== 'granted') {
             Notification.requestPermission()
         } else if (Notification.permission == 'granted') {
-            var notify = new Notification(title,
+            var notify = new Notification('salam',
                 {
                     body: body,
                     icon: icon
@@ -64,6 +64,20 @@ var permissionsJs = {       ////start permissionsJs
 // js:
 //permissionsJs.camera('myvideo')
                                         //end permissionsJs
+
+
+var locationJs = {            //start object location
+    getQueryString: function (url) {    //ommit url target current page
+        if (url === undefined) {
+            return (location.toString().slice(location.toString().indexOf('?') + 1, location.toString().length))
+        }
+        return (url.toString().slice(url.toString().indexOf('?') + 1, url.toString().length))
+    }
+}
+// alert(locationJs.getQueryString('m.php?id=20&fname=mahdi&lname=kavousi'))
+// alert(locationJs.getQueryString())  //get queryString current page
+
+                                    //start object location
 
 
 var processTextJs = {      //start processTextJs
