@@ -1,4 +1,4 @@
-//date release 1395/10/11    URL github is :    https://github.com/kavousimahdy
+//date release 1395/10/25   URL github is :    https://github.com/kavousimahdy
 //object permissionsJs,processTextJs
 
 var permissionsJs = {       ////start permissionsJs
@@ -63,20 +63,33 @@ var permissionsJs = {       ////start permissionsJs
 // <video autoplay="true" id="myvideo" width="280" style="border:2px solid gray;box-shadow: 10px 10px 50px inset " height="250"> </video><video autoplay="true" id="myvideo"> </video>
 // js:
 //permissionsJs.camera('myvideo')
-                                        //end permissionsJs
+//end permissionsJs
 
 
 var locationJs = {            //start object location
-    getQueryString: function (url) {    //ommit url target current page
+    getQueryString: function (url) {    //if ommit url target current page
+        var querystring;
         if (url === undefined) {
-            return (location.toString().slice(location.toString().indexOf('?') + 1, location.toString().length))
+            querystring= (location.toString().slice(location.toString().indexOf('?') + 1, location.toString().length))
+            if(querystring==location.href){
+                return null;
+            } else {
+                return  querystring;
+            }
         }
-        return (url.toString().slice(url.toString().indexOf('?') + 1, url.toString().length))
+        querystring= (url.toString().slice(url.toString().indexOf('?') + 1, url.toString().length));
+        if(querystring==url){
+            return null;
+        } else {
+            return  querystring;
+        }
     }
 }
+
+// alert(locationJs.getQueryString('m.php?id=20&fname=mahdi&lname=kavousi'))
 // alert(locationJs.getQueryString())  //get queryString current page
-// alert(locationJs.getQueryString('m.php?id=20&fname=mahdi&lname=kavousi'))  //get queryString specify url page 
-                                    //end object location
+
+//end object location
 
 
 var processTextJs = {      //start processTextJs
@@ -153,4 +166,4 @@ var processTextJs = {      //start processTextJs
 //        document.getElementById('pid').innerHTML = reverText;
 //    }
 
-                                    //end  processTextJs
+//end  processTextJs
