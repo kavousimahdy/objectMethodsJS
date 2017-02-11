@@ -192,12 +192,12 @@ var processTextJs = {      //start processTextJs
 //    }
                       //end  processTextJs
 var cssJs = {
-  getValues: function (id, property) {
+  getValues: function (cssSelector, property) {
     if (property == undefined) {
-      return (window.getComputedStyle(document.querySelectorAll(id)[document.querySelectorAll(id).length-1] , null).cssText).split(';').join('  <br />  ');
+      return (window.getComputedStyle(document.querySelectorAll(cssSelector)[document.querySelectorAll(cssSelector).length-1] , null).cssText).split(';').join('  <br />  ');
 
     } else {
-      return (window.getComputedStyle(document.querySelectorAll(id)[document.querySelectorAll(id).length-1], null).getPropertyValue(property));
+      return (window.getComputedStyle(document.querySelectorAll(cssSelector)[document.querySelectorAll(cssSelector).length-1], null).getPropertyValue(property));
     }
 
   }
