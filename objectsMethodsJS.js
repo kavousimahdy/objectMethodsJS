@@ -20,6 +20,25 @@ var permissionsJs = {       ////start permissionsJs
             // for handle error
         }
     },
+    audio:function (audioId) {
+    var audio = document.getElementById(audioId);
+    navigator.getUserMedia = navigator.getUserMedia ||
+        navigator.webkitGetUserMedia ||
+        navigator.mozGetUserMedia ||
+        navigator.msGetUserMedia ||
+        navigator.oGetUserMedia;
+    if (navigator.getUserMedia) {
+        navigator.getUserMedia({audio: true}, handleVideo, videoError);
+    }
+    function handleVideo(stream) {
+        audio.src = window.URL.createObjectURL(stream);
+
+    }
+
+    function videoError(e) {
+        // for handle error
+    }
+},
     notification: function (title, body, icon, urlPage, functionOnClickNotification, functionOnCloseNotification) {
         if (!("Notification" in window)) {
             alert('not support Notification browser');
@@ -47,7 +66,13 @@ var permissionsJs = {       ////start permissionsJs
     }
 }
 
-/* examples for notification object */
+/* examples for permissionsJs object */
+/* example for permissionsJs.camera()  */
+//html:
+//<video autoplay="true"  id="myvideo" width="280" style="border:2px solid gray;box-shadow: 10px 10px 50px inset " height="250"> </video>
+// js:
+//permissionsJs.camera('myvideo')
+
 
 //example for permissionsJs.notification()
 /* document.onclick = function () {
@@ -57,12 +82,12 @@ var permissionsJs = {       ////start permissionsJs
  })
  }*/
 
-
-/* example for permissionsJs.camera()  */
+/* example for permissionsJs.audio()  */
 //html:
-// <video autoplay="true" id="myvideo" width="280" style="border:2px solid gray;box-shadow: 10px 10px 50px inset " height="250"> </video><video autoplay="true" id="myvideo"> </video>
-// js:
-//permissionsJs.camera('myvideo')
+//<audio autoplay="true" style="display: none"  id="myaudio" > </audio>
+//js:
+//  permissionsJs.audio('myaudio');
+
 //end permissionsJs
 
 
@@ -165,5 +190,24 @@ var processTextJs = {      //start processTextJs
 //        var reverText = processTextJs.reverse("textid", '&#9865;');
 //        document.getElementById('pid').innerHTML = reverText;
 //    }
+                      //end  processTextJs
+var cssJs = {
+  getValues: function (id, property) {
+    if (property == undefined) {
+      return (window.getComputedStyle(document.querySelectorAll(id)[document.querySelectorAll(id).length-1] , null).cssText).split(';').join('  <br />  ');
 
-//end  processTextJs
+    } else {
+      return (window.getComputedStyle(document.querySelectorAll(id)[document.querySelectorAll(id).length-1], null).getPropertyValue(property));
+    }
+
+  }
+
+}
+
+//example cssJs object
+/// document.getElementById('mydiv').innerHTML= cssJs.getValues( "#mydiv");
+// document.getElementById('mydiv').innerHTML= cssJs.getValues( "#mydiv",'margin-right');
+// document.getElementsByClassName('mydiv')[0].innerHTML= cssJs.getValues( ".mydiv");
+//<div id="mydiv" style="height: 20px;margin:50px;margin-right: 100px;margin-right: 2px"></div>
+
+//end cssJs object
